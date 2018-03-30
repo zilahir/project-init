@@ -4,6 +4,12 @@ workingDirectory='/Users/rzilahi/work/';
 newProjectName=$1;
 currentUsername=logname
 
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied, exiting"
+    exit 1;
+fi
+
 # INIT PROJECT INIT SCRIPT
 
 echo "-------------------------------------------"
@@ -16,7 +22,8 @@ echo "-------------------------------------------"
 
 if [ ! -d $workingDirectory$newProjectName ];
 then
-  kdir -p $workingDirectory$newProjectName
+  mkdir -p $workingDirectory$newProjectName
+  cp package.json.template $workingDirectory$newProjectName
   cd $workingDirectory$newProjectName;
   echo -e "creating working directory ""\033[32m[OK]";
 else
@@ -57,8 +64,8 @@ echo "Add the project repo's url:";
 
 read projectRepoUrl;
 
-git remote add origin projectRepoUrl
-git push -u origin master
+#git remote add origin projectRepoUrl
+#git push -u origin master
 
 echo -e "configuring gitrepo ""\033[32m[OK]"
 tput init
